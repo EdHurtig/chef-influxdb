@@ -77,6 +77,10 @@ def create_config
 end
 
 def touch_logfile
+  directory node[:influxdb][:log_dir] do 
+    recursive true
+  end
+  
   logfile = Chef::Resource::File.new(@config['logging']['file'], @run_context)
   logfile.owner('influxdb')
   logfile.group('influxdb')
